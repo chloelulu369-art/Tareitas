@@ -2,7 +2,9 @@
 <?php 
 include 'conexion.php';
 $tareas_pendientes = "SELECT * FROM tareas WHERE estado=0";
-$sql_pasos = "SELECT * FROM pasos WHERE id_tareas=id(tareas)";
+mysqli_query($conexion, $tareas_pendientes);
+$sqlpasos = "SELECT * FROM pasos WHERE id_tareas=id(tareas)  ORDER BY orden ASC";
+mysqli_query($conexion, $sqlpasos);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,24 +18,28 @@ $sql_pasos = "SELECT * FROM pasos WHERE id_tareas=id(tareas)";
     <h1> Tareas pendientes</h1>
     <?php include 'header.php'; ?>
     <?php
-        while(mysqli_fetch_assoc($tareas_pendientes)){
+        while($fila = mysqli_fetch_assoc($tareas_pendientes)) { ?>
            <details>
                 <summary>
                     echo $id_tareas;
                     echo $prioridad;
                 </summary>
-                <p></p><br>
-                <p></p><br>
-                <p></p><br>
-                !empty(imagen_url= NULL){
-                    <img src="$imagen_url"><br>
-                }
-                //ordenar sql pasos por pendientes+paso en orden asendente
-                while(mysqli_fetch_assoc($tareas_pendientes)){
-                    <li $sql_pasos></li><br>
-                }
+                <p>Descripción: <?php echo $fila['descripcion']; ?></p><br>
+                <p>asignado para: <?php echo $fila['asignado']; ?></p><br>
+                <p> echo por: <?php echo $fila['made']; ?></p><br>
+                <?php if (!empty('imagen_url')) { ?>
+                    <img <?php echo $fila['imagen_url']; ?>><br>
+                <?php }
+                $sqlpasos = "SELECT * FROM pasos WHERE id_tareas=id(tareas)  ORDER BY orden ASC";
+                $sqlpasos = mysqli_query($conexion, $tareitas);
+                while(mysqli_fetch_assoc($sqlpasos)) { ?> 
+                    <li <?php echo $fila['orden']; ?>></li>
+                    <li <?php echo $fila['texto']; ?>></li><br>
+                 <?php } ?>
            </details>
-        }
-    ?>
+           <form>
+           <button type="submit" name="tarea">Guardar</button><br>
+           </form>
+         <?php } ?>
 </body>
 </html>
