@@ -1,6 +1,8 @@
-<?php
+<?php 
 include 'conexion.php';
-<include html>
+?>
+<!DOCTYPE html>
+
     <header class="header">
         <h1 class="titulo">TAREITAS</h1>
         <nav class="navheader">

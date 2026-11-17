@@ -1,2 +1,4 @@
-<?php
+<?php 
 include 'conexion.php';
+?>
+<!DOCTYPE html>
