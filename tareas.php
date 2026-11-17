@@ -115,5 +115,4 @@ $id_tareas = isset($_GET['id']) ? $_GET['id'] : "";
 
 </div>
 </body>
->>>>>>> be23cda (actualizacion pasos)
 </html>
