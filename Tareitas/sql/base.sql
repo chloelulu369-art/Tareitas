@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS tareitas;
 USE tareitas;
 CREATE TABLE IF NOT EXISTS tareas(
-    id                          INT primary key AUTO_INCREMENT NOT NULL,
+    id                          INT primary key AUTO_INCREMENT,
     nombre                      VARCHAR(555) NOT NULL,
     prioridad                   ENUM('urgente', 'solucionar rapido', 'tranqui', 'plata') NOT NULL,
     descripcion                 VARCHAR(1000),
@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS pasos(
     id_pasos                    INT primary key AUTO_INCREMENT NOT NULL,
     orden                       INT NOT NULL,
     texto                       VARCHAR(555) NOT NULL,
-    id_tareas                   INT NOT NULL,
+    id_tareas                   INT,
     FOREIGN KEY (id_tareas) references tareas(id)
 );
