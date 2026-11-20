@@ -27,17 +27,17 @@ $res_tareas = mysqli_query($conexion, $tareas_pendientes);
                 <?php if (!empty($fila['imagen_url'])) { ?>
                     <img src="<?php echo $fila['imagen_url']; ?>"><br>
                 <?php }
-                $id_tareas = "SELECT * FROM pasos WHERE $res_tareas = '" . $fila['id'] . "' ORDER BY orden ASC";
-                $id_tareas = "mysqli_query($conexion, $sqlpasos)";
-                while(mysqli_fetch_assoc($sqlpasos)) { ?> 
-                    <li <?php echo $fila['orden']; ?>></li>
-                    <li <?php echo $fila['texto']; ?>></li><br>
+                $sqlpasos = "SELECT * FROM pasos WHERE id_tareas = '" . $fila['id'] . "' ORDER BY orden ASC";
+                $res_pasos = mysqli_query($conexion, $sqlpasos);
+                while($paso = mysqli_fetch_assoc($res_pasos)) { ?> 
+                    <li> <?php echo $paso['orden']; ?></li>
+                    <li> <?php echo $paso['texto']; ?></li><br>
                  <?php } ?>
+                <form>
+                <button type="submit" name="tarea">Guardar</button><br>
+                </form>
            </details>
-           <form>
-           <button type="submit" name="tarea">Guardar</button><br>
-           </form>
            <button type="" name="editar_tarea">Editar</button><br>
          <?php } ?>
-</body>
+</body
 </html>
