@@ -15,28 +15,29 @@ $res_tareas = mysqli_query($conexion, $tareas_pendientes);
     <?php include 'header.php'; ?>
     <h1> Tareas pendientes</h1>
     <?php
-        while($tareas_pendientes) { ?>
+        while($fila = mysqli_fetch_assoc($res_tareas)) { ?>
            <details>
                 <summary>
-                    echo $id_tareas;
-                    echo $prioridad;
+                   <?php echo $fila['nombre']; ?> <br>
+                   <?php echo $fila['prioridad']; ?>
                 </summary>
-                <p>Descripción: <?php echo $res_tareas['descripcion']; ?></p><br>
-                <p>asignado para: <?php echo $res_tareas['asignado']; ?></p><br>
-                <p> echo por: <?php echo $res_tareas['made']; ?></p><br>
-                <?php if (!empty('imagen_url')) { ?>
-                    <img <?php echo $res_tareas['imagen_url']; ?>><br>
+                <p>Descripción: <?php echo $fila['descripcion']; ?></p><br>
+                <p>asignado para: <?php echo $fila['asignado']; ?></p><br>
+                <p> echo por: <?php echo $fila['made']; ?></p><br>
+                <?php if (!empty($fila['imagen_url'])) { ?>
+                    <img src="<?php echo $fila['imagen_url']; ?>"><br>
                 <?php }
-                $sqlpasos = "SELECT * FROM pasos WHERE id_tareas=id(tareas)  ORDER BY orden ASC";
-                $sqlpasos = mysqli_query($conexion, $tareitas);
+                $id_tareas = "SELECT * FROM pasos WHERE $res_tareas = '" . $fila['id'] . "' ORDER BY orden ASC";
+                $id_tareas = "mysqli_query($conexion, $sqlpasos)";
                 while(mysqli_fetch_assoc($sqlpasos)) { ?> 
-                    <li <?php echo $res_tareas['orden']; ?>></li>
-                    <li <?php echo $res_tareas['texto']; ?>></li><br>
+                    <li <?php echo $fila['orden']; ?>></li>
+                    <li <?php echo $fila['texto']; ?>></li><br>
                  <?php } ?>
            </details>
            <form>
            <button type="submit" name="tarea">Guardar</button><br>
            </form>
+           <button type="" name="editar_tarea">Editar</button><br>
          <?php } ?>
 </body>
 </html>
